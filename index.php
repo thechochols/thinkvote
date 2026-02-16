@@ -17,46 +17,88 @@ if (!$name) {
     <html lang="pl">
     <head>
         <meta charset="UTF-8">
-        <title>Wybór gracza</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wybór gracza — ThinkVote</title>
         <link rel="apple-touch-icon" sizes="180x180" href="scrum/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/scrum/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/scrum/favicon-16x16.png">
         <link rel="manifest" href="/scrum/site.webmanifest">
         <style>
-            body {
-                font-family: sans-serif;
-                background: #f4f4f4;
-                text-align: center;
-                padding: 2rem;
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
+
+            body {
+                font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                min-height: 100vh;
+                text-align: center;
+                padding: 3rem 1.5rem;
+                color: white;
+            }
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 300;
+                color: white;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                margin-bottom: 0.5rem;
+            }
+
+            .subtitle {
+                color: rgba(255,255,255,0.5);
+                font-size: 0.95rem;
+                margin-bottom: 2.5rem;
+            }
+
             .player-grid {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 1rem;
-                margin-top: 2rem;
+                max-width: 700px;
+                margin: 0 auto;
             }
+
             .player-card {
-                background: white;
-                border: 2px solid #007BFF;
-                color: #007BFF;
-                padding: 1rem 2rem;
-                border-radius: 12px;
-                font-size: 1.2rem;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .player-card:hover {
-                background: #007BFF;
+                background: rgba(255,255,255,0.08);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255,255,255,0.15);
                 color: white;
+                padding: 1rem 2.2rem;
+                border-radius: 14px;
+                font-size: 1.15rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                animation: fadeInUp 0.5s ease backwards;
             }
-            h2 {
-                color: #333;
+
+            .player-card:hover {
+                background: rgba(99,102,241,0.35);
+                border-color: rgba(99,102,241,0.6);
+                transform: translateY(-4px);
+                box-shadow: 0 8px 30px rgba(99,102,241,0.3);
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         </style>
     </head>
     <body>
         <h2>🧑‍💻 Wybierz swoje imię</h2>
+        <p class="subtitle">Kliknij na swoje imię, aby dołączyć do sesji</p>
         <form method="post">
             <div class="player-grid">
                 <?php foreach ($players as $p): ?>
@@ -76,25 +118,71 @@ if (!$name) {
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThinkVote</title>
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            background: #f7f7f7;
-            padding: 2rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1, h2, h3 {
-            margin-bottom: 1rem;
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 30px rgba(99,102,241,0.4), 0 2px 10px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h3::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: rgba(99,102,241,0.6);
+            border-radius: 2px;
         }
 
         .vote-btns {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .vote-btns form {
@@ -103,16 +191,18 @@ if (!$name) {
 
         .card-button {
             position: relative;
-            width: 80px;
-            height: 128px;
-            background: white;
-            color: #007bff;
-            border: 2px solid #007bff;
-            border-radius: 12px;
+            width: 76px;
+            height: 120px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
             font-size: 2rem;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: background 0.2s ease, color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -120,80 +210,180 @@ if (!$name) {
         }
 
         .card-button:hover {
-            background: #007bff;
+            background: rgba(99,102,241,0.45);
+            border-color: rgba(99,102,241,0.7);
             color: white;
+            transform: translateY(-8px) scale(1.06);
+            box-shadow: 0 14px 35px rgba(99,102,241,0.35);
+        }
+
+        .card-button:active {
+            transform: translateY(-2px) scale(1.02);
         }
 
         .card-button .corner {
             position: absolute;
-            font-size: 0.8rem;
-            font-weight: bold;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .card-button:hover .corner {
+            color: rgba(255,255,255,0.9);
         }
 
         .card-button .top-left {
-            top: 6px;
-            left: 8px;
+            top: 7px;
+            left: 9px;
         }
 
         .card-button .bottom-right {
-            bottom: 6px;
-            right: 8px;
+            bottom: 7px;
+            right: 9px;
             transform: rotate(180deg);
         }
 
         .card-button .center {
-            font-size: 1.8rem;
-        }
-
-        .card {
-            display: inline-block;
-            background: white;
-            padding: 1rem;
-            margin: 0.5rem;
-            border-radius: 10px;
-            min-width: 80px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .own {
-            border: 2px solid #007BFF;
+            font-size: 1.7rem;
+            font-weight: 600;
         }
 
         .actions {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .actions form {
+            display: inline-block;
         }
 
         .actions button {
-            margin: 0.5rem;
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 2rem;
             font-size: 1rem;
-            background: white;
-            color: #28a745;
-            border: 2px solid #28a745;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
-        .actions button:hover {
-            background: #28a745;
-            color: white;
+        .actions .action {
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.35);
+            color: #34d399;
+            box-shadow: 0 4px 15px rgba(16,185,129,0.1);
+        }
+
+        .actions .action:hover {
+            background: rgba(16,185,129,0.35);
+            border-color: rgba(16,185,129,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16,185,129,0.25);
         }
 
         .actions .reset {
-            color: #dc3545;
-            border-color: #dc3545;
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.35);
+            color: #f87171;
+            box-shadow: 0 4px 15px rgba(239,68,68,0.1);
         }
 
         .actions .reset:hover {
-            background: #dc3545;
+            background: rgba(239,68,68,0.35);
+            border-color: rgba(239,68,68,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(239,68,68,0.25);
+        }
+
+        #players {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 1rem auto 0;
+        }
+
+        .card {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            min-width: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.4s ease backwards;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .own {
+            border: 2px solid rgba(99,102,241,0.5);
+            box-shadow: 0 0 25px rgba(99,102,241,0.15), 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .player-name {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .player-vote {
+            font-size: 2.2rem;
+            padding-top: 0.8rem;
             color: white;
+            transition: all 0.4s ease;
+        }
+
+        .player-vote.revealed {
+            animation: flipIn 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flipIn {
+            0% {
+                transform: rotateY(90deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.5), transparent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
         }
     </style>
 </head>
 <body>
-    <h1>🂠 ThinkVote</h1></br>
+    <h1>🂠 ThinkVote</h1>
     <h2>Pomyśl i zagłosuj, <?= htmlspecialchars($name) ?></h2>
 
     <div class="vote-btns">
@@ -210,19 +400,21 @@ if (!$name) {
     </div>
 
     <div class="actions">
-        <form method="POST" action="reveal.php" style="display:inline;">
+        <form method="POST" action="reveal.php">
             <button class="action">👁️ Odkryj karty</button>
         </form>
-        <form method="POST" action="reset.php" style="display:inline;">
+        <form method="POST" action="reset.php">
             <button class="action reset">🔄 Resetuj</button>
         </form>
     </div>
 
-    <h3>Głosy:</h3>
+    <h3>Głosy</h3>
+    <div class="divider"></div>
     <div id="players"></div>
 
     <script>
         const playerName = <?= json_encode($name) ?>;
+        let previousReveal = false;
 
         function fetchPlayers() {
             fetch('fetch.php')
@@ -230,25 +422,33 @@ if (!$name) {
                 .then(data => {
                     const container = document.getElementById('players');
                     container.innerHTML = '';
-                    data.players.forEach(player => {
+
+                    data.players.forEach((player, index) => {
                         const div = document.createElement('div');
                         div.className = 'card';
+                        div.style.animationDelay = (index * 0.06) + 's';
                         if (player.name === playerName) div.classList.add('own');
 
                         const name = document.createElement('strong');
+                        name.className = 'player-name';
                         name.textContent = player.name;
                         div.appendChild(name);
-                        div.appendChild(document.createElement('br'));
 
                         const vote = document.createElement('div');
-                        vote.style.fontSize = '2.2rem';
-                        vote.style.paddingTop = '1rem';
+                        vote.className = 'player-vote';
+
+                        if (data.reveal && !previousReveal) {
+                            vote.classList.add('revealed');
+                        }
+
                         vote.innerHTML = data.reveal
-                            ? (player.vote ?? '-')
+                            ? (player.vote ?? '–')
                             : (player.vote ? '🂠' : '⏳');
                         div.appendChild(vote);
                         container.appendChild(div);
                     });
+
+                    previousReveal = data.reveal;
                 });
         }
 
