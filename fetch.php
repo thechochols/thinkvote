@@ -52,19 +52,18 @@ if ($reveal) {
         arsort($counts);
         $maxCount = max($counts);
         $modes = array_keys(array_filter($counts, fn($c) => $c === $maxCount));
+        $trimmedTotal = count($trimmed);
 
-        if (count($modes) === 1) {
-            // Jedna wyraźna moda
+        if (count($modes) === 1 && $maxCount > $trimmedTotal / 2) {
+            // Wyraźna dominacja — moda ma ponad 50% głosów
             $suggestedLabel = $modes[0];
             $method = 'mode';
         } else {
-            // Remis — bierz medianę z trimmed (górną przy parzystej liczbie)
+            // Brak dominacji lub remis — mediana (górna przy parzystej liczbie)
             $count = count($trimmed);
             if ($count % 2 === 0) {
-                // Parzysta liczba — bierz wyższy ze środkowych elementów
                 $medianIndex = $count / 2;
             } else {
-                // Nieparzysta — środkowy element
                 $medianIndex = intdiv($count, 2);
             }
             $suggestedLabel = $trimmed[$medianIndex];
