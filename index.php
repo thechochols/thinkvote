@@ -167,14 +167,14 @@ if (!$name) {
             letter-spacing: 3px;
         }
 
+        /* === KARTY GŁOSOWANIA === */
         .vote-btns {
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             margin-bottom: 2rem;
-            overflow-x: auto;
-            padding: 0.5rem 0;
+            padding: 0.5rem 1rem;
         }
 
         .vote-btns form {
@@ -183,15 +183,15 @@ if (!$name) {
 
         .card-button {
             position: relative;
-            width: 62px;
-            height: 90px;
+            width: 80px;
+            height: 120px;
             background: white;
             color: #6366f1;
             border: 2px solid #e5e7eb;
             border-radius: 12px;
-            font-size: 1.6rem;
+            font-size: 2rem;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.07);
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
@@ -224,7 +224,7 @@ if (!$name) {
 
         .card-button .corner {
             position: absolute;
-            font-size: 0.55rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: #9ca3af;
             transition: color 0.25s ease;
@@ -235,21 +235,22 @@ if (!$name) {
         }
 
         .card-button .top-left {
-            top: 5px;
-            left: 6px;
+            top: 6px;
+            left: 8px;
         }
 
         .card-button .bottom-right {
-            bottom: 5px;
-            right: 6px;
+            bottom: 6px;
+            right: 8px;
             transform: rotate(180deg);
         }
 
         .card-button .center {
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             font-weight: 600;
         }
 
+        /* === PRZYCISKI AKCJI === */
         .actions {
             margin-bottom: 2rem;
             display: flex;
@@ -299,6 +300,7 @@ if (!$name) {
             box-shadow: 0 6px 20px rgba(220,38,38,0.25);
         }
 
+        /* === KARTY GRACZY === */
         #players {
             display: flex;
             flex-wrap: wrap;
