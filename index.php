@@ -231,7 +231,7 @@ if (!$name) {
         }
 
         .card-button:hover .corner {
-            color: #6366f1;
+            color: #dc2626;
         }
 
         .card-button .top-left {
