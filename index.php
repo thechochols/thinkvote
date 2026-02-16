@@ -211,7 +211,7 @@ if (!$name) {
             border-color: #dc2626;
             color: white;
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(99,102,241,0.35);
+            box-shadow: 0 8px 25px rgb(240 100 100 / 35%);
         }
 
         .card-button.selected .corner {
@@ -331,7 +331,7 @@ if (!$name) {
         }
 
         .own {
-            border-color: #6366f1;
+            border-color: #dc2626;
             box-shadow: 0 0 0 3px rgba(99,102,241,0.1), 0 1px 3px rgba(0,0,0,0.06);
         }
 
@@ -406,7 +406,7 @@ if (!$name) {
         .suggestion-box .value {
             font-size: 3rem;
             font-weight: 700;
-            color: #6366f1;
+            color: #dc2626;
             margin-bottom: 0.8rem;
         }
 
