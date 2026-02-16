@@ -247,7 +247,7 @@ if (!$name) {
 
         .card-button .center {
             font-size: 1.7rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         /* === PRZYCISKI AKCJI === */
@@ -266,7 +266,7 @@ if (!$name) {
         .actions button {
             padding: 0.7rem 1.8rem;
             font-size: 0.95rem;
-            font-weight: 500;
+            font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -354,6 +354,68 @@ if (!$name) {
             animation: flipIn 0.5s ease;
         }
 
+        /* === SUGESTIA STORY POINTS === */
+        #suggestion {
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .suggestion-box {
+            background: white;
+            border: 2px solid #e4e4e7;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .suggestion-box .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #a1a1aa;
+            margin-bottom: 0.6rem;
+        }
+
+        .suggestion-box .value {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #e11d48;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .suggestion-box .details {
+            font-size: 0.85rem;
+            color: #71717a;
+            line-height: 1.6;
+        }
+
+        .suggestion-box .details .tag {
+            display: inline-block;
+            background: #fff1f2;
+            color: #e11d48;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0 0.1rem;
+        }
+
+        .suggestion-box .details .tag.muted {
+            background: #f4f4f5;
+            color: #71717a;
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: #e4e4e7;
+            margin: 1.2rem auto;
+            border-radius: 2px;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -374,14 +436,6 @@ if (!$name) {
                 transform: rotateY(0);
                 opacity: 1;
             }
-        }
-
-        .divider {
-            width: 50px;
-            height: 2px;
-            background: #e4e4e7;
-            margin: 1.2rem auto;
-            border-radius: 2px;
         }
     </style>
 </head>
@@ -414,6 +468,8 @@ if (!$name) {
     <h3>Głosy</h3>
     <div class="divider"></div>
     <div id="players"></div>
+
+    <div id="suggestion"></div>
 
     <script>
         const playerName = <?= json_encode($name) ?>;
@@ -463,6 +519,41 @@ if (!$name) {
                     btn.classList.remove('selected');
                 }
             });
+        }
+
+        function renderSuggestion(suggestion) {
+            const container = document.getElementById('suggestion');
+
+            if (!suggestion) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let detailsHTML = '';
+
+            if (suggestion.totalVoters >= 3) {
+                detailsHTML = `
+                    Średnia po odrzuceniu skrajnych: <span class="tag">${suggestion.average}</span><br>
+                    Głosów uwzględnionych: <span class="tag muted">${suggestion.trimmedCount} z ${suggestion.totalVoters}</span>
+                    &nbsp;·&nbsp;
+                    Odrzucono: <span class="tag muted">min ${suggestion.min}</span> <span class="tag muted">max ${suggestion.max}</span>
+                `;
+            } else if (suggestion.totalVoters === 2) {
+                detailsHTML = `
+                    Średnia: <span class="tag">${suggestion.average}</span><br>
+                    <span class="tag muted">Za mało głosów, aby odrzucić skrajne</span>
+                `;
+            } else {
+                detailsHTML = `<span class="tag muted">Tylko 1 głos</span>`;
+            }
+
+            container.innerHTML = `
+                <div class="suggestion-box">
+                    <div class="label">📊 Sugerowane Story Points</div>
+                    <div class="value">${suggestion.value}</div>
+                    <div class="details">${detailsHTML}</div>
+                </div>
+            `;
         }
 
         function updatePlayers(data) {
@@ -525,6 +616,9 @@ if (!$name) {
                     });
                 }
             }
+
+            // Renderuj sugestię
+            renderSuggestion(data.reveal ? data.suggestion : null);
 
             prevDataJSON = newJSON;
             prevReveal = data.reveal;
