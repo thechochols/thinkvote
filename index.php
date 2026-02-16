@@ -183,8 +183,8 @@ if (!$name) {
 
         .card-button {
             position: relative;
-            width: 62px;
-            height: 90px;
+            width: 66px;
+            height: 100px;
             background: white;
             color: #dc2626;
             border: 2px solid #e5e7eb;
