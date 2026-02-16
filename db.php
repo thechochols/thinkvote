@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db   = 'u868991478_scrum_poker';
-$user = 'u868991478_scrum_poker';
-$pass = 'xxxx';
+$db   = 'u868991478_thinkvote';
+$user = 'u868991478_thinkvote';
+$pass = 'Beijing4$';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
