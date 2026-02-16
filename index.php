@@ -9,6 +9,14 @@ if (isset($_POST['name'])) {
 
 $name = $_SESSION['player_name'] ?? null;
 
+// Pobierz aktualny głos gracza
+$currentVote = null;
+if ($name) {
+    $stmt = $pdo->prepare("SELECT vote FROM players WHERE name = ?");
+    $stmt->execute([$name]);
+    $currentVote = $stmt->fetchColumn();
+}
+
 // Jeśli imię nie wybrane – pokaż ekran wyboru
 if (!$name) {
     $players = $pdo->query("SELECT name FROM players ORDER BY id")->fetchAll();
@@ -32,23 +40,22 @@ if (!$name) {
 
             body {
                 font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+                background: #f0f2f5;
                 min-height: 100vh;
                 text-align: center;
                 padding: 3rem 1.5rem;
-                color: white;
+                color: #1a1a2e;
             }
 
             h2 {
                 font-size: 2rem;
-                font-weight: 300;
-                color: white;
-                text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                font-weight: 600;
+                color: #1a1a2e;
                 margin-bottom: 0.5rem;
             }
 
             .subtitle {
-                color: rgba(255,255,255,0.5);
+                color: #6b7280;
                 font-size: 0.95rem;
                 margin-bottom: 2.5rem;
             }
@@ -63,25 +70,25 @@ if (!$name) {
             }
 
             .player-card {
-                background: rgba(255,255,255,0.08);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border: 1px solid rgba(255,255,255,0.15);
-                color: white;
+                background: white;
+                border: 2px solid #e5e7eb;
+                color: #374151;
                 padding: 1rem 2.2rem;
                 border-radius: 14px;
                 font-size: 1.15rem;
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.06);
                 animation: fadeInUp 0.5s ease backwards;
             }
 
             .player-card:hover {
-                background: rgba(99,102,241,0.35);
-                border-color: rgba(99,102,241,0.6);
+                background: #6366f1;
+                border-color: #6366f1;
+                color: white;
                 transform: translateY(-4px);
-                box-shadow: 0 8px 30px rgba(99,102,241,0.3);
+                box-shadow: 0 8px 25px rgba(99,102,241,0.25);
             }
 
             @keyframes fadeInUp {
@@ -130,79 +137,62 @@ if (!$name) {
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #f0f2f5;
             min-height: 100vh;
             padding: 2rem 1rem;
-            color: white;
+            color: #1a1a2e;
         }
 
         h1 {
             font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
-            text-shadow: 0 0 30px rgba(99,102,241,0.4), 0 2px 10px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
+            color: #1a1a2e;
+            letter-spacing: 0.5px;
         }
 
         h2 {
-            font-size: 1.2rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 2.5rem;
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #6b7280;
+            margin-bottom: 2rem;
         }
 
         h3 {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-        }
-
-        h3::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background: rgba(99,102,241,0.6);
-            border-radius: 2px;
+            letter-spacing: 3px;
         }
 
         .vote-btns {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
-            gap: 0.8rem;
-            margin-bottom: 2.5rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
         }
 
         .vote-btns form {
-            display: inline-block;
+            flex-shrink: 0;
         }
 
         .card-button {
             position: relative;
-            width: 76px;
-            height: 120px;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: rgba(255,255,255,0.85);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            font-size: 2rem;
+            width: 62px;
+            height: 90px;
+            background: white;
+            color: #6366f1;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1.6rem;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -210,49 +200,61 @@ if (!$name) {
         }
 
         .card-button:hover {
-            background: rgba(99,102,241,0.45);
-            border-color: rgba(99,102,241,0.7);
+            border-color: #6366f1;
+            color: #6366f1;
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.2);
+        }
+
+        .card-button.selected {
+            background: #6366f1;
+            border-color: #6366f1;
             color: white;
-            transform: translateY(-8px) scale(1.06);
-            box-shadow: 0 14px 35px rgba(99,102,241,0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.35);
+        }
+
+        .card-button.selected .corner {
+            color: rgba(255,255,255,0.7);
         }
 
         .card-button:active {
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-1px) scale(0.98);
         }
 
         .card-button .corner {
             position: absolute;
-            font-size: 0.7rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            color: rgba(255,255,255,0.5);
+            color: #9ca3af;
+            transition: color 0.25s ease;
         }
 
         .card-button:hover .corner {
-            color: rgba(255,255,255,0.9);
+            color: #6366f1;
         }
 
         .card-button .top-left {
-            top: 7px;
-            left: 9px;
+            top: 5px;
+            left: 6px;
         }
 
         .card-button .bottom-right {
-            bottom: 7px;
-            right: 9px;
+            bottom: 5px;
+            right: 6px;
             transform: rotate(180deg);
         }
 
         .card-button .center {
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             font-weight: 600;
         }
 
         .actions {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
@@ -261,49 +263,47 @@ if (!$name) {
         }
 
         .actions button {
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
+            padding: 0.7rem 1.8rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .actions .action {
-            background: rgba(16,185,129,0.15);
-            border: 1px solid rgba(16,185,129,0.35);
-            color: #34d399;
-            box-shadow: 0 4px 15px rgba(16,185,129,0.1);
+            background: #ecfdf5;
+            border: 2px solid #a7f3d0;
+            color: #059669;
         }
 
         .actions .action:hover {
-            background: rgba(16,185,129,0.35);
-            border-color: rgba(16,185,129,0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(16,185,129,0.25);
+            background: #059669;
+            border-color: #059669;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5,150,105,0.25);
         }
 
         .actions .reset {
-            background: rgba(239,68,68,0.15);
-            border: 1px solid rgba(239,68,68,0.35);
-            color: #f87171;
-            box-shadow: 0 4px 15px rgba(239,68,68,0.1);
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            color: #dc2626;
         }
 
         .actions .reset:hover {
-            background: rgba(239,68,68,0.35);
-            border-color: rgba(239,68,68,0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(239,68,68,0.25);
+            background: #dc2626;
+            border-color: #dc2626;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220,38,38,0.25);
         }
 
         #players {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             max-width: 900px;
             margin: 1rem auto 0;
         }
@@ -312,14 +312,12 @@ if (!$name) {
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 1.2rem 1.5rem;
-            border-radius: 16px;
-            min-width: 100px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: white;
+            padding: 1rem 1.3rem;
+            border-radius: 14px;
+            min-width: 90px;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
         }
 
@@ -328,25 +326,25 @@ if (!$name) {
         }
 
         .card:hover {
-            background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         }
 
         .own {
-            border: 2px solid rgba(99,102,241,0.5);
-            box-shadow: 0 0 25px rgba(99,102,241,0.15), 0 4px 15px rgba(0,0,0,0.2);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1), 0 1px 3px rgba(0,0,0,0.06);
         }
 
         .player-name {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
+            color: #6b7280;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
         .player-vote {
-            font-size: 2.2rem;
-            padding-top: 0.8rem;
-            color: white;
+            font-size: 2rem;
+            padding-top: 0.6rem;
+            color: #1a1a2e;
             transition: all 0.4s ease;
         }
 
@@ -377,10 +375,10 @@ if (!$name) {
         }
 
         .divider {
-            width: 60px;
+            width: 50px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.5), transparent);
-            margin: 1.5rem auto;
+            background: #e5e7eb;
+            margin: 1.2rem auto;
             border-radius: 2px;
         }
     </style>
@@ -393,7 +391,7 @@ if (!$name) {
         <?php foreach (['☕','?','0','½','1','2','3','5','8','13','20','40','100'] as $val): ?>
             <form method="POST" action="vote.php">
                 <input type="hidden" name="vote" value="<?= $val ?>">
-                <button class="card-button">
+                <button class="card-button<?= ($currentVote === $val) ? ' selected' : '' ?>">
                     <span class="corner top-left"><?= $val ?></span>
                     <span class="center"><?= $val ?></span>
                     <span class="corner bottom-right"><?= $val ?></span>
@@ -451,8 +449,24 @@ if (!$name) {
             return div;
         }
 
+        function updateSelectedCard(data) {
+            const myData = data.players.find(p => p.name === playerName);
+            const myVote = myData ? myData.vote : null;
+            document.querySelectorAll('.card-button').forEach(btn => {
+                const form = btn.closest('form');
+                const input = form.querySelector('input[name="vote"]');
+                if (input && input.value === myVote) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+        }
+
         function updatePlayers(data) {
             const newJSON = JSON.stringify(data);
+
+            updateSelectedCard(data);
 
             if (newJSON === prevDataJSON) return;
 
