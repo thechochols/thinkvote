@@ -40,22 +40,22 @@ if (!$name) {
 
             body {
                 font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                background: #f0f2f5;
+                background: #fafafa;
                 min-height: 100vh;
                 text-align: center;
                 padding: 3rem 1.5rem;
-                color: #1a1a2e;
+                color: #18181b;
             }
 
             h2 {
                 font-size: 2rem;
                 font-weight: 600;
-                color: #1a1a2e;
+                color: #18181b;
                 margin-bottom: 0.5rem;
             }
 
             .subtitle {
-                color: #6b7280;
+                color: #71717a;
                 font-size: 0.95rem;
                 margin-bottom: 2.5rem;
             }
@@ -71,24 +71,24 @@ if (!$name) {
 
             .player-card {
                 background: white;
-                border: 2px solid #e5e7eb;
-                color: #374151;
+                border: 2px solid #e4e4e7;
+                color: #3f3f46;
                 padding: 1rem 2.2rem;
                 border-radius: 14px;
                 font-size: 1.15rem;
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
                 animation: fadeInUp 0.5s ease backwards;
             }
 
             .player-card:hover {
-                background: #6366f1;
-                border-color: #6366f1;
+                background: #e11d48;
+                border-color: #e11d48;
                 color: white;
                 transform: translateY(-4px);
-                box-shadow: 0 8px 25px rgba(99,102,241,0.25);
+                box-shadow: 0 8px 25px rgba(225,29,72,0.2);
             }
 
             @keyframes fadeInUp {
@@ -137,31 +137,31 @@ if (!$name) {
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             text-align: center;
-            background: #f0f2f5;
+            background: #fafafa;
             min-height: 100vh;
             padding: 2rem 1rem;
-            color: #1a1a2e;
+            color: #18181b;
         }
 
         h1 {
             font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
-            color: #1a1a2e;
+            color: #18181b;
             letter-spacing: 0.5px;
         }
 
         h2 {
             font-size: 1.15rem;
             font-weight: 400;
-            color: #6b7280;
+            color: #71717a;
             margin-bottom: 2rem;
         }
 
         h3 {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #9ca3af;
+            color: #a1a1aa;
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -186,12 +186,12 @@ if (!$name) {
             width: 80px;
             height: 120px;
             background: white;
-            color: #6366f1;
-            border: 2px solid #e5e7eb;
+            color: #e11d48;
+            border: 2px solid #e4e4e7;
             border-radius: 12px;
             font-size: 2rem;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
@@ -200,22 +200,22 @@ if (!$name) {
         }
 
         .card-button:hover {
-            border-color: #6366f1;
-            color: #6366f1;
+            border-color: #e11d48;
+            color: #e11d48;
             transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(99,102,241,0.2);
+            box-shadow: 0 10px 25px rgba(225,29,72,0.15);
         }
 
         .card-button.selected {
-            background: #6366f1;
-            border-color: #6366f1;
+            background: #e11d48;
+            border-color: #e11d48;
             color: white;
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(99,102,241,0.35);
+            box-shadow: 0 8px 25px rgba(225,29,72,0.3);
         }
 
         .card-button.selected .corner {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.6);
         }
 
         .card-button:active {
@@ -226,12 +226,12 @@ if (!$name) {
             position: absolute;
             font-size: 0.65rem;
             font-weight: 700;
-            color: #9ca3af;
+            color: #a1a1aa;
             transition: color 0.25s ease;
         }
 
         .card-button:hover .corner {
-            color: #6366f1;
+            color: #e11d48;
         }
 
         .card-button .top-left {
@@ -273,8 +273,8 @@ if (!$name) {
         }
 
         .actions .action {
-            background: #ecfdf5;
-            border: 2px solid #a7f3d0;
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
             color: #059669;
         }
 
@@ -287,8 +287,8 @@ if (!$name) {
         }
 
         .actions .reset {
-            background: #fef2f2;
-            border: 2px solid #fecaca;
+            background: #fff1f2;
+            border: 2px solid #fecdd3;
             color: #dc2626;
         }
 
@@ -318,8 +318,8 @@ if (!$name) {
             padding: 1rem 1.3rem;
             border-radius: 14px;
             min-width: 90px;
-            border: 2px solid #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            border: 2px solid #e4e4e7;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
 
@@ -329,16 +329,16 @@ if (!$name) {
 
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.07);
         }
 
         .own {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.1), 0 1px 3px rgba(0,0,0,0.06);
+            border-color: #e11d48;
+            box-shadow: 0 0 0 3px rgba(225,29,72,0.08), 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .player-name {
-            color: #6b7280;
+            color: #71717a;
             font-size: 0.85rem;
             font-weight: 500;
         }
@@ -346,7 +346,7 @@ if (!$name) {
         .player-vote {
             font-size: 2rem;
             padding-top: 0.6rem;
-            color: #1a1a2e;
+            color: #18181b;
             transition: all 0.4s ease;
         }
 
@@ -379,7 +379,7 @@ if (!$name) {
         .divider {
             width: 50px;
             height: 2px;
-            background: #e5e7eb;
+            background: #e4e4e7;
             margin: 1.2rem auto;
             border-radius: 2px;
         }
