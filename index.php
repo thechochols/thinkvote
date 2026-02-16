@@ -321,6 +321,9 @@ if (!$name) {
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+        }
+
+        .card.new {
             animation: fadeInUp 0.4s ease backwards;
         }
 
@@ -414,46 +417,112 @@ if (!$name) {
 
     <script>
         const playerName = <?= json_encode($name) ?>;
-        let previousReveal = false;
+
+        let prevDataJSON = '';
+        let prevReveal = false;
+        let isFirstLoad = true;
+
+        function getVoteDisplay(player, reveal) {
+            if (reveal) return player.vote ?? '–';
+            return player.vote ? '🂠' : '⏳';
+        }
+
+        function buildCard(player, index, reveal, justRevealed, animate) {
+            const div = document.createElement('div');
+            div.className = 'card';
+            div.dataset.name = player.name;
+            if (animate) {
+                div.classList.add('new');
+                div.style.animationDelay = (index * 0.06) + 's';
+            }
+            if (player.name === playerName) div.classList.add('own');
+
+            const nameEl = document.createElement('strong');
+            nameEl.className = 'player-name';
+            nameEl.textContent = player.name;
+            div.appendChild(nameEl);
+
+            const voteEl = document.createElement('div');
+            voteEl.className = 'player-vote';
+            if (justRevealed) voteEl.classList.add('revealed');
+            voteEl.innerHTML = getVoteDisplay(player, reveal);
+            div.appendChild(voteEl);
+
+            return div;
+        }
+
+        function updatePlayers(data) {
+            const newJSON = JSON.stringify(data);
+
+            if (newJSON === prevDataJSON) return;
+
+            const container = document.getElementById('players');
+            const justRevealed = data.reveal && !prevReveal;
+            const justHidden = !data.reveal && prevReveal;
+
+            if (isFirstLoad) {
+                container.innerHTML = '';
+                data.players.forEach((player, index) => {
+                    container.appendChild(buildCard(player, index, data.reveal, false, true));
+                });
+                isFirstLoad = false;
+            } else {
+                const existingCards = container.querySelectorAll('.card');
+                const existingMap = {};
+                existingCards.forEach(card => {
+                    existingMap[card.dataset.name] = card;
+                });
+
+                const newNames = data.players.map(p => p.name);
+                const existingNames = Object.keys(existingMap);
+
+                const playersChanged = newNames.length !== existingNames.length ||
+                    newNames.some((name, i) => name !== existingNames[i]);
+
+                if (playersChanged) {
+                    container.innerHTML = '';
+                    data.players.forEach((player, index) => {
+                        const isNew = !existingMap[player.name];
+                        container.appendChild(buildCard(player, index, data.reveal, justRevealed, isNew));
+                    });
+                } else {
+                    data.players.forEach(player => {
+                        const card = existingMap[player.name];
+                        if (!card) return;
+
+                        const voteEl = card.querySelector('.player-vote');
+                        const newVoteHTML = getVoteDisplay(player, data.reveal);
+
+                        if (voteEl.innerHTML !== newVoteHTML) {
+                            voteEl.innerHTML = newVoteHTML;
+
+                            if (justRevealed) {
+                                voteEl.classList.remove('revealed');
+                                void voteEl.offsetWidth;
+                                voteEl.classList.add('revealed');
+                            }
+                        }
+
+                        if (justHidden) {
+                            voteEl.classList.remove('revealed');
+                        }
+                    });
+                }
+            }
+
+            prevDataJSON = newJSON;
+            prevReveal = data.reveal;
+        }
 
         function fetchPlayers() {
             fetch('fetch.php')
                 .then(res => res.json())
-                .then(data => {
-                    const container = document.getElementById('players');
-                    container.innerHTML = '';
-
-                    data.players.forEach((player, index) => {
-                        const div = document.createElement('div');
-                        div.className = 'card';
-                        div.style.animationDelay = (index * 0.06) + 's';
-                        if (player.name === playerName) div.classList.add('own');
-
-                        const name = document.createElement('strong');
-                        name.className = 'player-name';
-                        name.textContent = player.name;
-                        div.appendChild(name);
-
-                        const vote = document.createElement('div');
-                        vote.className = 'player-vote';
-
-                        if (data.reveal && !previousReveal) {
-                            vote.classList.add('revealed');
-                        }
-
-                        vote.innerHTML = data.reveal
-                            ? (player.vote ?? '–')
-                            : (player.vote ? '🂠' : '⏳');
-                        div.appendChild(vote);
-                        container.appendChild(div);
-                    });
-
-                    previousReveal = data.reveal;
-                });
+                .then(updatePlayers)
+                .catch(() => {});
         }
 
         fetchPlayers();
-        setInterval(fetchPlayers, 1000);
+        setInterval(fetchPlayers, 2000);
     </script>
 </body>
 </html>
