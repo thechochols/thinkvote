@@ -203,7 +203,7 @@ if (!$name) {
             border-color: #dc2626;
             color: #dc2626;
             transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(99,102,241,0.2);
+            box-shadow: 0 10px 25px rgba(240,100,100,0.2);
         }
 
         .card-button.selected {
