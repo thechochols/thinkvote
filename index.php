@@ -265,7 +265,7 @@ if (!$name) {
         .actions button {
             padding: 0.7rem 1.8rem;
             font-size: 0.95rem;
-            font-weight: 600;
+            font-weight: 500;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
