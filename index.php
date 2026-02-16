@@ -186,7 +186,7 @@ if (!$name) {
             width: 62px;
             height: 90px;
             background: white;
-            color: #6366f1;
+            color: #dc2626;
             border: 2px solid #e5e7eb;
             border-radius: 12px;
             font-size: 1.6rem;
@@ -200,8 +200,8 @@ if (!$name) {
         }
 
         .card-button:hover {
-            border-color: #6366f1;
-            color: #6366f1;
+            border-color: #dc2626;
+            color: #dc2626;
             transform: translateY(-6px);
             box-shadow: 0 10px 25px rgba(99,102,241,0.2);
         }
