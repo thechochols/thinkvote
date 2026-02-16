@@ -40,22 +40,22 @@ if (!$name) {
 
             body {
                 font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                background: #fafafa;
+                background: #f0f2f5;
                 min-height: 100vh;
                 text-align: center;
                 padding: 3rem 1.5rem;
-                color: #18181b;
+                color: #1a1a2e;
             }
 
             h2 {
                 font-size: 2rem;
                 font-weight: 600;
-                color: #18181b;
+                color: #1a1a2e;
                 margin-bottom: 0.5rem;
             }
 
             .subtitle {
-                color: #71717a;
+                color: #6b7280;
                 font-size: 0.95rem;
                 margin-bottom: 2.5rem;
             }
@@ -71,24 +71,24 @@ if (!$name) {
 
             .player-card {
                 background: white;
-                border: 2px solid #e4e4e7;
-                color: #3f3f46;
+                border: 2px solid #e5e7eb;
+                color: #374151;
                 padding: 1rem 2.2rem;
                 border-radius: 14px;
                 font-size: 1.15rem;
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.06);
                 animation: fadeInUp 0.5s ease backwards;
             }
 
             .player-card:hover {
-                background: #e11d48;
-                border-color: #e11d48;
+                background: #6366f1;
+                border-color: #6366f1;
                 color: white;
                 transform: translateY(-4px);
-                box-shadow: 0 8px 25px rgba(225,29,72,0.2);
+                box-shadow: 0 8px 25px rgba(99,102,241,0.25);
             }
 
             @keyframes fadeInUp {
@@ -137,44 +137,44 @@ if (!$name) {
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             text-align: center;
-            background: #fafafa;
+            background: #f0f2f5;
             min-height: 100vh;
             padding: 2rem 1rem;
-            color: #18181b;
+            color: #1a1a2e;
         }
 
         h1 {
             font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 0.3rem;
-            color: #18181b;
+            color: #1a1a2e;
             letter-spacing: 0.5px;
         }
 
         h2 {
             font-size: 1.15rem;
             font-weight: 400;
-            color: #71717a;
+            color: #6b7280;
             margin-bottom: 2rem;
         }
 
         h3 {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #a1a1aa;
+            color: #9ca3af;
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
 
-        /* === KARTY GŁOSOWANIA === */
         .vote-btns {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             margin-bottom: 2rem;
-            padding: 0.5rem 1rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
         }
 
         .vote-btns form {
@@ -183,15 +183,15 @@ if (!$name) {
 
         .card-button {
             position: relative;
-            width: 80px;
-            height: 120px;
+            width: 62px;
+            height: 90px;
             background: white;
-            color: #e11d48;
-            border: 2px solid #e4e4e7;
+            color: #6366f1;
+            border: 2px solid #e5e7eb;
             border-radius: 12px;
-            font-size: 2rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
@@ -200,22 +200,22 @@ if (!$name) {
         }
 
         .card-button:hover {
-            border-color: #e11d48;
-            color: #e11d48;
+            border-color: #6366f1;
+            color: #6366f1;
             transform: translateY(-6px);
-            box-shadow: 0 10px 25px rgba(225,29,72,0.15);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.2);
         }
 
         .card-button.selected {
-            background: #e11d48;
-            border-color: #e11d48;
+            background: #6366f1;
+            border-color: #6366f1;
             color: white;
             transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(225,29,72,0.3);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.35);
         }
 
         .card-button.selected .corner {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.7);
         }
 
         .card-button:active {
@@ -224,33 +224,32 @@ if (!$name) {
 
         .card-button .corner {
             position: absolute;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             font-weight: 700;
-            color: #a1a1aa;
+            color: #9ca3af;
             transition: color 0.25s ease;
         }
 
         .card-button:hover .corner {
-            color: #e11d48;
+            color: #6366f1;
         }
 
         .card-button .top-left {
-            top: 6px;
-            left: 8px;
+            top: 5px;
+            left: 6px;
         }
 
         .card-button .bottom-right {
-            bottom: 6px;
-            right: 8px;
+            bottom: 5px;
+            right: 6px;
             transform: rotate(180deg);
         }
 
         .card-button .center {
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             font-weight: 600;
         }
 
-        /* === PRZYCISKI AKCJI === */
         .actions {
             margin-bottom: 2rem;
             display: flex;
@@ -273,8 +272,8 @@ if (!$name) {
         }
 
         .actions .action {
-            background: #f0fdf4;
-            border: 2px solid #bbf7d0;
+            background: #ecfdf5;
+            border: 2px solid #a7f3d0;
             color: #059669;
         }
 
@@ -287,8 +286,8 @@ if (!$name) {
         }
 
         .actions .reset {
-            background: #fff1f2;
-            border: 2px solid #fecdd3;
+            background: #fef2f2;
+            border: 2px solid #fecaca;
             color: #dc2626;
         }
 
@@ -300,7 +299,6 @@ if (!$name) {
             box-shadow: 0 6px 20px rgba(220,38,38,0.25);
         }
 
-        /* === KARTY GRACZY === */
         #players {
             display: flex;
             flex-wrap: wrap;
@@ -318,8 +316,8 @@ if (!$name) {
             padding: 1rem 1.3rem;
             border-radius: 14px;
             min-width: 90px;
-            border: 2px solid #e4e4e7;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
         }
 
@@ -329,16 +327,16 @@ if (!$name) {
 
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         }
 
         .own {
-            border-color: #e11d48;
-            box-shadow: 0 0 0 3px rgba(225,29,72,0.08), 0 1px 3px rgba(0,0,0,0.05);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1), 0 1px 3px rgba(0,0,0,0.06);
         }
 
         .player-name {
-            color: #71717a;
+            color: #6b7280;
             font-size: 0.85rem;
             font-weight: 500;
         }
@@ -346,74 +344,12 @@ if (!$name) {
         .player-vote {
             font-size: 2rem;
             padding-top: 0.6rem;
-            color: #18181b;
+            color: #1a1a2e;
             transition: all 0.4s ease;
         }
 
         .player-vote.revealed {
             animation: flipIn 0.5s ease;
-        }
-
-        /* === SUGESTIA STORY POINTS === */
-        #suggestion {
-            max-width: 500px;
-            margin: 2rem auto 0;
-        }
-
-        .suggestion-box {
-            background: white;
-            border: 2px solid #e4e4e7;
-            border-radius: 16px;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            animation: fadeInUp 0.6s ease backwards;
-        }
-
-        .suggestion-box .label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #a1a1aa;
-            margin-bottom: 0.6rem;
-        }
-
-        .suggestion-box .value {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #e11d48;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .suggestion-box .details {
-            font-size: 0.85rem;
-            color: #71717a;
-            line-height: 1.6;
-        }
-
-        .suggestion-box .details .tag {
-            display: inline-block;
-            background: #fff1f2;
-            color: #e11d48;
-            padding: 0.15rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin: 0 0.1rem;
-        }
-
-        .suggestion-box .details .tag.muted {
-            background: #f4f4f5;
-            color: #71717a;
-        }
-
-        .divider {
-            width: 50px;
-            height: 2px;
-            background: #e4e4e7;
-            margin: 1.2rem auto;
-            border-radius: 2px;
         }
 
         @keyframes fadeInUp {
@@ -436,6 +372,62 @@ if (!$name) {
                 transform: rotateY(0);
                 opacity: 1;
             }
+        }
+
+        .divider {
+            width: 50px;
+            height: 2px;
+            background: #e5e7eb;
+            margin: 1.2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Suggestion box */
+        .suggestion-box {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            max-width: 500px;
+            margin: 2rem auto 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .suggestion-box .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .suggestion-box .value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 0.8rem;
+        }
+
+        .suggestion-box .details {
+            font-size: 0.8rem;
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        .suggestion-box .tag {
+            display: inline-block;
+            background: #f3f4f6;
+            border-radius: 6px;
+            padding: 0.15rem 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .suggestion-box .tag.muted {
+            font-weight: 400;
+            color: #9ca3af;
         }
     </style>
 </head>
@@ -468,7 +460,6 @@ if (!$name) {
     <h3>Głosy</h3>
     <div class="divider"></div>
     <div id="players"></div>
-
     <div id="suggestion"></div>
 
     <script>
@@ -530,17 +521,27 @@ if (!$name) {
             }
 
             let detailsHTML = '';
+            let methodLabel = '';
 
             if (suggestion.totalVoters >= 3) {
+                const trimmedStr = suggestion.trimmedVotes.join(', ');
+
+                if (suggestion.method === 'mode') {
+                    methodLabel = 'najczęstszy głos';
+                } else {
+                    methodLabel = 'mediana (remis)';
+                }
+
                 detailsHTML = `
-                    Średnia po odrzuceniu skrajnych: <span class="tag">${suggestion.average}</span><br>
+                    Metoda: <span class="tag">${methodLabel}</span><br>
+                    Po odrzuceniu skrajnych: <span class="tag muted">${trimmedStr}</span><br>
                     Głosów uwzględnionych: <span class="tag muted">${suggestion.trimmedCount} z ${suggestion.totalVoters}</span>
                     &nbsp;·&nbsp;
                     Odrzucono: <span class="tag muted">min ${suggestion.min}</span> <span class="tag muted">max ${suggestion.max}</span>
                 `;
             } else if (suggestion.totalVoters === 2) {
                 detailsHTML = `
-                    Średnia: <span class="tag">${suggestion.average}</span><br>
+                    Głosy: <span class="tag">${suggestion.trimmedVotes.join(', ')}</span><br>
                     <span class="tag muted">Za mało głosów, aby odrzucić skrajne</span>
                 `;
             } else {
@@ -618,7 +619,7 @@ if (!$name) {
             }
 
             // Renderuj sugestię
-            renderSuggestion(data.reveal ? data.suggestion : null);
+            renderSuggestion(data.suggestion);
 
             prevDataJSON = newJSON;
             prevReveal = data.reveal;
