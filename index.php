@@ -207,8 +207,8 @@ if (!$name) {
         }
 
         .card-button.selected {
-            background: #6366f1;
-            border-color: #6366f1;
+            background: #dc2626;
+            border-color: #dc2626;
             color: white;
             transform: translateY(-4px);
             box-shadow: 0 8px 25px rgba(99,102,241,0.35);
@@ -226,7 +226,7 @@ if (!$name) {
             position: absolute;
             font-size: 0.55rem;
             font-weight: 700;
-            color: #9ca3af;
+            color: #dc2626;
             transition: color 0.25s ease;
         }
 
@@ -247,7 +247,7 @@ if (!$name) {
 
         .card-button .center {
             font-size: 1.4rem;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .actions {
